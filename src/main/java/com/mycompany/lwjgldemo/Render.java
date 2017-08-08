@@ -33,6 +33,12 @@ public class Render {
             throw new IllegalStateException("Could not Initialize GLFW");
         }
         window = GLFW.glfwCreateWindow(400, 400, "LWJGL Demo", 0, 0);
+
+        GLFW.glfwSetKeyCallback(window,(window, key, scandle, action, mods) -> {
+            if (key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE){
+                GLFW.glfwSetWindowShouldClose(window,true);
+            }
+        });
         GLFW.glfwMakeContextCurrent(window);
     }
 
@@ -52,11 +58,11 @@ public class Render {
         GL11.glRotated(angle, 0, 0, 1);
         GL11.glTranslated(0.25, 0, 0);
         GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex3f(-0.0f, 0, 0);
+        GL11.glVertex3f(-0.1f, 0, 0);
         GL11.glVertex3f(+0.4f, 0, 0);
-        GL11.glVertex3f(0.4f, -0.1f, 0);
-        GL11.glVertex3f(0.4f, +0.1f, 0);
 
+//        GL11.glVertex3f(0.4f, -0.1f, 0);
+//        GL11.glVertex3f(0.4f, +0.1f, 0);
         GL11.glVertex3f(+0.5f, 0, 0);
         GL11.glVertex3f(0.4f, +0.1f, 0);
 
