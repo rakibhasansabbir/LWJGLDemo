@@ -18,9 +18,11 @@ public class Render {
 
     private long window;
     private float angle;
+    private float speed;
 
     public Render() {
         angle = 0;
+        speed = 1;
     }
 
     public void run() {
@@ -37,6 +39,12 @@ public class Render {
         GLFW.glfwSetKeyCallback(window,(window, key, scandle, action, mods) -> {
             if (key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE){
                 GLFW.glfwSetWindowShouldClose(window,true);
+            }else if (key == GLFW.GLFW_KEY_UP && action != GLFW.GLFW_RELEASE){
+                speed = speed + 0.1f;
+            }else if (key == GLFW.GLFW_KEY_DOWN && action != GLFW.GLFW_RELEASE){
+                speed = speed - 0.1f;
+            }else if (key == GLFW.GLFW_KEY_SPACE && action != GLFW.GLFW_RELEASE){
+                speed = 0;
             }
         });
         GLFW.glfwMakeContextCurrent(window);
@@ -72,7 +80,7 @@ public class Render {
         GL11.glEnd();
         GL11.glPopMatrix();
 
-        angle -= .2f;
+        angle -= speed;
 
     }
 }
